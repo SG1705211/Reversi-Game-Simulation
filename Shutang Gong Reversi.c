@@ -1,6 +1,5 @@
 // This program is a simulation for reversi game using the terminal and
 // standard I/O.
-// Author: Shutang Gong
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -157,8 +156,14 @@ int main() {
     // board initilization.
     char board[26][26];
     int n = 0;
-    printf("Enter the board dimension:  ");
-    scanf("%d", &n);
+    printf("Enter the board dimension (3-26):  ");
+    // dimension has to be between 3 and 23.
+    while (scanf("%d", &n) == 1) {
+        if (n >= 3 && n <= 23) {
+            break;
+        }
+        printf("Dimension out of bound, please re-enter a valid number bewteen 3 and 26");
+    }
     char character = 0;
     char row = 0;
     char column = 0;
@@ -236,9 +241,9 @@ int main() {
         // Read two consecutive character, and break if input is invalid.
         if (scanf(" %c", &row) != 1) break;
         if (scanf(" %c", &column) != 1) break;
-        // minus a is to convert a into 0, b into 1 etc.
-        pos_row = row - 'a';
-        pos_col = column - 'a';
+        // minus A is to convert A into 0, B into 1 etc.
+        pos_row = row - 'A';
+        pos_col = column - 'A';
         // before the testing, set valid parameter to false.
         valid = false;
         for (int i = 0; i < sol_num; i++) {
