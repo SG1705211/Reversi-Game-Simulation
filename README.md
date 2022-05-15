@@ -5,7 +5,7 @@ Noted: The dimension can only between 3 and 26. Any other numbers will be treate
 Although allowed, it is recommended that using the dimension 8 as it is the most way to enjoy this game.\
 # Game Rule
 Reversi is a strategy board game. \
-On this game, you can either play front side or reverse-side, denoted by O (front) and X(reverse)\
+On this game, you can either play front side or reverse-side, denoted by `O` (front) and `X`(reverse)\
 All the valid move for specific colour is denoted by star character.\
 To illustrate what is the valid move, considering the board:
 ```
