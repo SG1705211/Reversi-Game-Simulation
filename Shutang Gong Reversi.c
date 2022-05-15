@@ -1,5 +1,6 @@
 // This program is a simulation for reversi game using the terminal and
 // standard I/O.
+// Author: Shutang Gong
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
