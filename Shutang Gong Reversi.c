@@ -192,7 +192,34 @@ int main() {
     // for the actual playing process of the game.
     bool valid = false;
     while (1) {
-
+        // if sol_num == 0; switch side instantly.
+        if (sol_num == 0) {
+            accmulating++;
+            if (basis == 'R') {
+                basis = 'F';
+            }
+            else {
+                basis = 'R';
+            }
+            // After this, recalculating the possible moves.
+            // reset the solution list and solution number.
+            sol_num = 0;
+            for (int row = 0; row < n; row++) {
+                for (int col = 0; col < n; col++) {
+                    // -1, 0, 1 are all just directions of the searching process.
+                    for (int row_dir = -1; row_dir < 2; row_dir++) {
+                        for (int col_dir = -1; col_dir < 2; col_dir++) {
+                            if (row_dir == 0 && col_dir == 0) {
+                                continue;
+                            }
+                            find_solution_in_direction(board, n, row, col,
+                                basis, row_dir, col_dir, sol_list, &sol_num);
+                        }
+                    }
+                }
+            }
+            continue;
+        }
         // terminating condition: no moves can be made for both player.
         // in other words, accmulating == 2
         if (accmulating == 2) {
@@ -229,7 +256,7 @@ int main() {
                 else {
                     basis = 'R';
                 }
-                // After this, recalculating the possible moves.
+                // Recalculating the possible moves.
                 // reset the solution list and solution number.
                 sol_num = 0;
                 for (int row = 0; row < n; row++) {
@@ -253,7 +280,7 @@ int main() {
         }
         // otherwise, the user inputs an invalid move.
         if (!valid) {
-            printf("Invalid move, please enter an valid move.");
+            printf("Invalid move, please enter an valid move. \n");
         }
     }
 }
