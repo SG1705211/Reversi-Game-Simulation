@@ -27,6 +27,8 @@ struct solution {
 
 // board_printer (board, n) is used to print the reversi board of dimension
 // n * n on terminal.
+// For printing format, I got inspired by rodolfoams work.
+// https://github.com/rodolfoams/reversi-c
 void board_printer(char board[][26], int n, struct solution sol_list[],
     int solution_number) {
     for (int i = 0; i < n; i++) {
@@ -52,10 +54,10 @@ void board_printer(char board[][26], int n, struct solution sol_list[],
         printf("%c |", 'a' + i);
         for (int j = 0; j < n; j++) {
             // the three cases: front, reverse, or empty.
-            if (board[i][j] == 'W') {
+            if (board[i][j] == 'F') {
                 printf("%s", front);
             }
-            if (board[i][j] == 'B') {
+            if (board[i][j] == 'R') {
                 printf("%s", reverse);
             }
             if (board[i][j] == 'U') {
@@ -87,10 +89,10 @@ void board_init(char board[26][26], int n) {
             board[i][j] = 'U';
         }
     }
-    board[n / 2 - 1][n / 2 - 1] = 'W';
-    board[n / 2][n / 2 - 1] = 'B';
-    board[n / 2 - 1][n / 2] = 'B';
-    board[n / 2][n / 2] = 'W';
+    board[n / 2 - 1][n / 2 - 1] = 'F';
+    board[n / 2][n / 2 - 1] = 'R';
+    board[n / 2 - 1][n / 2] = 'R';
+    board[n / 2][n / 2] = 'F';
 }
 // in_bound_check(n, row, col) returns true if the given point
 // (row, col) is in the given bounds and false otherwise.
@@ -112,10 +114,10 @@ bool find_solution_in_direction(char board[][26], int n, int row, int col,
     }
     char reverse_colour = 0;
     // find the reverse colour.
-    if (colour == 'W') {
-        reverse_colour = 'B';
-    } if (colour == 'B') {
-        reverse_colour = 'W';
+    if (colour == 'F') {
+        reverse_colour = 'R';
+    } if (colour == 'R') {
+        reverse_colour = 'F';
     }
     // find the adjcent colour of point (row, col)
     int x = row + deltaRow;
@@ -172,22 +174,38 @@ int main() {
                         continue;
                     }
                     find_solution_in_direction(board, n, row, col,
-                        'B', row_dir, col_dir, sol_list, &sol_num);
+                        'R', row_dir, col_dir, sol_list, &sol_num);
                 }
             }
         }
     }
     board_printer(board, n, sol_list, sol_num);
-    // basic parameter
-    char basis = 'B';
+    // basic parameter, for this part, pos_row and pos_col should be minus
+    // 'a' because it can converts character into the index for the board
+    // dimension array. For exmaple, if row == a, then row - a equals 0.
+    char basis = 'R';
     int pos_row = row - 'a';
     int pos_col = column - 'a';
+    // if accmulating equals to 2, then the game should terminates because
+    // that implies no move can be made.
+    int accmulating = 0;
     // for the actual playing process of the game.
     bool valid = false;
     while (1) {
-        basis = 'B';
-        // Read three consecutive character, and break if input is invalid.
-        if (scanf(" %c", &character) != 1) break;
+
+        // terminating condition: no moves can be made for both player.
+        // in other words, accmulating == 2
+        if (accmulating == 2) {
+            printf("Game Over");
+            return 0;
+        }
+        if (basis == 'R') {
+            printf("reverse side's move\n");
+        }
+        if (basis == 'F') {
+            printf("front side's move:\n");
+        }
+        // Read two consecutive character, and break if input is invalid.
         if (scanf(" %c", &row) != 1) break;
         if (scanf(" %c", &column) != 1) break;
         // minus a is to convert a into 0, b into 1 etc.
@@ -200,16 +218,16 @@ int main() {
                 valid = true;
                 // flip the current direction.
                 while (pos_row != sol_list[i].end_row || pos_col != sol_list[i].end_col) {
-                    board[pos_row][pos_col] = character;
+                    board[pos_row][pos_col] = basis;
                     pos_row += sol_list[i].pos_row;
                     pos_col += sol_list[i].pos_col;
                 }
                 // flipping the basis (change the round)
-                if (basis == 'B') {
-                    basis = 'W';
+                if (basis == 'R') {
+                    basis = 'F';
                 }
                 else {
-                    basis = 'B';
+                    basis = 'R';
                 }
                 // After this, recalculating the possible moves.
                 // reset the solution list and solution number.
