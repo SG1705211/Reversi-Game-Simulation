@@ -7,7 +7,7 @@ Although allowed, it is recommended that using the dimension 8 as it is the most
 Reversi is a strategy board game\
 On this game, you can either play front side or reverse-side, denoted by `O` (front) and `X`(reverse)\
 The game starts with reverse side piece, and the piece will be placed using command.\
-For example, if you want to place a piece on `(c,c)`, you can simply type `CC` (All cap)
+For example, if you want to place a piece on `(c,c)`, you can simply type `CC` (All cap)\
 All the valid move for specific colour is denoted by `*` character.\
 To illustrate what is the valid move, considering the board:
 ```
