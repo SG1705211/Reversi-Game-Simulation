@@ -71,6 +71,7 @@ h |     |     |     |     |     |     |     |     |
   |_____|_____|_____|_____|_____|_____|_____|_____|
 ```
 Noted that since the front side piece on cd is between two reverse side, then it is flipped.\
+Noted that if only one of player cannot make any move, the game will switch side.
 After the point where no move can be made for both player, the game terminates.\
 The player with more pieces on the board win.\
 Enjoy.
