@@ -1,6 +1,5 @@
 // This program is a simulation for reversi game using the terminal and
 // standard I/O.
-// Author: Shutang Gong
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -95,11 +94,14 @@ void board_init(char board[26][26], int n) {
     board[n / 2 - 1][n / 2] = 'R';
     board[n / 2][n / 2] = 'F';
 }
+
+
 // in_bound_check(n, row, col) returns true if the given point
 // (row, col) is in the given bounds and false otherwise.
 bool in_bound_check(int n, int row, int col) {
     return (row < n&& row >= 0) && (col < n&& col >= 0);
 }
+
 
 // find_solution_in_direction (board, n, row, col) returns true if 
 // the given point (row, col) is a valid move on board, and
@@ -153,18 +155,38 @@ bool find_solution_in_direction(char board[][26], int n, int row, int col,
     return false;
 }
 
+
+int winning_decision(char board[][26], int n) {
+    int r_count = 0;
+    int f_count = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (board[i][j] == 'R') {
+                r_count++;
+            }
+            else if (board[i][j] == 'F') {
+                f_count++;
+            }
+        }
+    }
+    if (f_count > r_count) {
+        return 'F';
+    }
+    else if (f_count < r_count) {
+        return 'R';
+    }
+    else {
+        return 0;
+    }
+}
+
+
 int main() {
     // board initilization.
     char board[26][26];
     int n = 0;
-    printf("Enter the board dimension (3-26):  ");
-    // dimension has to be between 3 and 23.
-    while (scanf("%d", &n) == 1) {
-        if (n >= 3 && n <= 23) {
-            break;
-        }
-        printf("Dimension out of bound, please re-enter a valid number bewteen 3 and 26");
-    }
+    printf("Enter the board dimension:  ");
+    scanf("%d", &n);
     char character = 0;
     char row = 0;
     char column = 0;
@@ -186,7 +208,6 @@ int main() {
             }
         }
     }
-    board_printer(board, n, sol_list, sol_num);
     // basic parameter, for this part, pos_row and pos_col should be minus
     // 'a' because it can converts character into the index for the board
     // dimension array. For exmaple, if row == a, then row - a equals 0.
@@ -199,9 +220,16 @@ int main() {
     // for the actual playing process of the game.
     bool valid = false;
     while (1) {
+        // terminating condition: no moves can be made for both player.
+        // in other words, accmulating == 2
+        if (accmulating == 2) {
+            break;
+        }
+
         // if sol_num == 0; switch side instantly.
         if (sol_num == 0) {
             accmulating++;
+            printf("switch side ***********************************************\n");
             if (basis == 'R') {
                 basis = 'F';
             }
@@ -227,12 +255,15 @@ int main() {
             }
             continue;
         }
-        // terminating condition: no moves can be made for both player.
-        // in other words, accmulating == 2
-        if (accmulating == 2) {
-            printf("Game Over");
-            return 0;
+
+        // the condition that breaks is when there are two CONSECUTIVE rounds
+        // where no move can be made. If there's only one round, then reset
+        // the accmulator.
+        if (accmulating == 1) {
+            accmulating = 0;
         }
+        // print the board
+        board_printer(board, n, sol_list, sol_num);
         if (basis == 'R') {
             printf("reverse side's move\n");
         }
@@ -242,9 +273,9 @@ int main() {
         // Read two consecutive character, and break if input is invalid.
         if (scanf(" %c", &row) != 1) break;
         if (scanf(" %c", &column) != 1) break;
-        // minus A is to convert A into 0, B into 1 etc.
-        pos_row = row - 'A';
-        pos_col = column - 'A';
+        // minus a is to convert a into 0, b into 1 etc.
+        pos_row = row - 'a';
+        pos_col = column - 'a';
         // before the testing, set valid parameter to false.
         valid = false;
         for (int i = 0; i < sol_num; i++) {
@@ -280,7 +311,6 @@ int main() {
                         }
                     }
                 }
-                board_printer(board, n, sol_list, sol_num);
                 // terminates, go to the next round.
                 break;
             }
@@ -290,4 +320,16 @@ int main() {
             printf("Invalid move, please enter an valid move. \n");
         }
     }
+    // to find who wins the game, simply count the current piece for each side.
+    char winner = winning_decision(board, n);
+    if (winner) {
+        if (winner == 'F') {
+            printf("Game over, Front side wins the game.\n");
+        }
+        else {
+            printf("Game over, Reverse side wins the game.\n");
+        }
+        return 0;
+    }
+    printf("The game ends in tie.");
 }
