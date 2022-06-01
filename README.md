@@ -2,7 +2,7 @@
 This program is a simulation of reversi using C langauge\
 To play the game, simply compile the file, then the board will be printed on the terminal.\
 Noted: The dimension can only between 3 and 26. Any other numbers will be treated as invalid.\
-Although allowed, it is recommended that using the dimension 8 as it is the most way to enjoy this game.\
+Although allowed, it is recommended that using the dimension 8 as it is the most way to enjoy this game.
 # Game Rule
 Reversi is a strategy board game\
 On this game, you can either play front side or reverse-side, denoted by `O` (front) and `X`(reverse)\
