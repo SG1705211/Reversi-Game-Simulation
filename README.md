@@ -4,7 +4,7 @@ This program is a simulation of Reversi game using C langauge
 Being obsessed with the idea of "who can design the best Reversi Solver Algorithm" and "Computer vs Computer", I decide to design my own Reversi game solver to compete with my friends in U of Toronto. \
 Before implementing the solver algorithm, I implemented this game to allow user play Reversi in C environment.
 # Techniques.
-The techniques used in this programs are mostly dynamic memory and structures pointer.\
+The techniques used in this programs are mostly  **dynamic memory** and **structures pointer**.\
 The reason for using both techniques is to use less memory, and to be faster.\
 Using structure pointers, the "board array" only needs to be iterated once when finding the potential solution of Reversi at any steps\
 Using dynamic memory and doubling stratregy, the program asked for the minimum amount of memory from heap as possible.\
