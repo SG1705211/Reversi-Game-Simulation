@@ -10,7 +10,7 @@ Using structure pointers, the "board array" only needs to be iterated once when 
 Using dynamic memory and doubling stratregy, the program asked for the minimum amount of memory from heap as possible.\
 The usage of structure pointer also makes the code more readable, as it provides a neat way to display solution.
 # How to play the game.
-Compile the `Reversi.c` file using ```g++ Reversi.c -o Reversi.out``` and run the output file.
+Compile the `Reversi.c` file using ```gcc Reversi.c -o Reversi.out``` and run the output file.
 # Game Rule
 Reversi is a strategy board game\
 On this game, you can either play front side or reverse-side, denoted by `O` (front) and `X`(reverse)\
