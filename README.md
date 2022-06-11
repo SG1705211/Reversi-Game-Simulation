@@ -12,12 +12,13 @@ The usage of structure pointer also makes the code more readable, as it provides
 # How to play the game.
 Compile the `Reversi.c` file using ```gcc Reversi.c -o Reversi.out``` and run the output file.
 # Game Rule
+You can skip this part if you are already familiar with the game.\
 Reversi is a strategy board game\
-On this game, you can either play front side or reverse-side, denoted by `O` (front) and `X`(reverse)\
-The game starts with reverse side piece, and the piece will be placed using command.\
-For example, if you want to place a piece on `(c,c)`, you can simply type `CC` (All cap)\
-All the valid move for specific colour is denoted by `*` character.
-To illustrate what is the valid move, considering the board:
+On this game, you can either play `front-side` or `reverse-side`, denoted by `O` (front) and `X`(reverse), and the first player will play reverse-side.\
+All the placement of the piece is controled by typing the coordinates.\
+You can play in a position if, in any direction, you can trap more than one's opponent's piece with your existing pieces.\
+All the valid move for specific colour is denoted by `*` character.\
+To illustrate this using an exmaple:
 ```
      a     b     c     d     e     f     g     h
    _____ _____ _____ _____ _____ _____ _____ _____
@@ -78,8 +79,9 @@ g |     |     |     |     |     |     |     |     |
 h |     |     |     |     |     |     |     |     |
   |_____|_____|_____|_____|_____|_____|_____|_____|
 ```
-Noted that since the front side piece on cd is between two reverse side, then it is flipped.\
-Noted that if only one of player cannot make any move, the game will switch side.
+Noted that since the front side piece on cd is between two reverse side, then it is flipped.
+# End of the game:
+If only one of player cannot make any move, the game will switch side instantly\
 After the point where no move can be made for both player, the game terminates.\
 The player with more pieces on the board win.\
 Enjoy.
