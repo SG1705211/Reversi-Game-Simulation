@@ -1,8 +1,16 @@
-# Reversi-Game-Simulation
-This program is a simulation of reversi using C langauge\
-To play the game, simply compile the file, then the board will be printed on the terminal.\
-Noted: The dimension can only between 3 and 26. Any other numbers will be treated as invalid.\
-Although allowed, it is recommended that using the dimension 8 as it is the most way to enjoy this game.
+# Reversi-Game-Simulation.
+This program is a simulation of Reversi game using C langauge\
+# Motivation.
+Being obsessed with the idea of "who can design the best Reversi Solver Algorithm" and "Computer vs Computer", I decide to design my own Reversi game solver to compete with my friends in U of Toronto. \
+Before implementing the solver algorithm, I implemented this game to allow user play Reversi in C environment.\
+# Techniques.
+The techniques used in this programs are mostly dynamic memory and structures pointer.\
+The reason for using both techniques is to use less memory, and to be faster.\
+Using structure pointers, the "board array" only needs to be iterated once when finding the potential solution of Reversi at any steps\
+Using dynamic memory and doubling stratregy, the program asked for the minimum amount of memory from heap as possible.\
+The usage of structure pointer also makes the code more readable, as it provides a neat way to display solution.\
+# How to play the game.
+Compile the `Reversi.c` file using ```g++ Reversi.c -o Reversi.out``` and run the output file.
 # Game Rule
 Reversi is a strategy board game\
 On this game, you can either play front side or reverse-side, denoted by `O` (front) and `X`(reverse)\
