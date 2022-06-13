@@ -9,7 +9,7 @@ The reason for using both techniques is to use less memory, and to be faster.\
 Using structure pointers, the "board array" only needs to be iterated once when finding the potential solution of Reversi at any steps\
 Using dynamic memory and doubling stratregy, the program asked for the minimum amount of memory from heap as possible.\
 The usage of structure pointer also makes the code more readable, as it provides a neat way to display solution.
-# How to play the game.
+# Compilation.
 Compile the `Reversi.c` file using ```gcc Reversi.c -o Reversi.out``` and run the output file.
 # Game Rule
 You can skip this part if you are already familiar with the game.\
