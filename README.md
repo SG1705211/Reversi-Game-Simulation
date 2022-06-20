@@ -12,7 +12,7 @@ The usage of structure pointer also makes the code more readable, as it provides
 # Compilation.
 To play the game, firstly clone the repository:
    ```bash
-   $ git clone https://github.com/SG1705211/Reversi-Game-Simulation
+   git clone https://github.com/SG1705211/Reversi-Game-Simulation
    ```
 Then, when in the root directory, compile the Reversi.c:
 ```bash
