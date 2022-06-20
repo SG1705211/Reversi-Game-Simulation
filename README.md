@@ -16,8 +16,9 @@ To play the game, firstly clone the repository:
    ```
 Then, when in the root directory, compile the Reversi.c:
 ```bash
-gcc Reversi.c
+gcc Reversi.c -o Reverse_game
 ```
+Simply run the output file, and enjoy the game
 # Game Rule
 You can skip this part if you are already familiar with the game.\
 Reversi is a strategy board game\
